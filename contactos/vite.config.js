@@ -1,11 +1,35 @@
-import react, { reactCompilerPreset } from '@vitejs/plugin-react'
-import babel from '@rolldown/plugin-babel'
-import { defineConfig } from 'vite'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import { VitePWA } from "vite-plugin-pwa";
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [
     react(),
-    babel({ presets: [reactCompilerPreset()] })
-  ],
-})
+
+    VitePWA({
+      registerType: "autoUpdate",
+
+      manifest: {
+        name: "Lista de Contactos",
+        short_name: "Contactos",
+        description: "Aplicación para administrar contactos",
+        theme_color: "#ffffff",
+        background_color: "#ffffff",
+        display: "standalone",
+
+        icons: [
+          {
+            src: "/icon-192.png",
+            sizes: "192x192",
+            type: "image/png"
+          },
+          {
+            src: "/icon-512.png",
+            sizes: "512x512",
+            type: "image/png"
+          }
+        ]
+      }
+    })
+  ]
+});
