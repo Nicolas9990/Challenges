@@ -3,7 +3,7 @@
 
 La aplicación se encuentra disponible en Netlify:
 
-**[Pegar aquí el enlace de Netlify]**
+https://lighthearted-hamster-b8ccbd.netlify.app
 
 ## Instalación en el celular
 
@@ -16,7 +16,7 @@ La aplicación se encuentra disponible en Netlify:
 5. La aplicación aparecerá en la pantalla principal del celular.
 
 ### iPhone
-
+                 
 1. Abrir el enlace desde Safari.
 2. Presionar el botón de compartir.
 3. Seleccionar "Agregar a pantalla de inicio".
