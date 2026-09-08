@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0e132e70-51f4-4884-90fc-a03f89fb6f21" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../contactos/node_modules/@rolldown/binding-win32-x64-msvc/rolldown-binding.win32-x64-msvc.node" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../dist/assets/index-CDFb68Pd.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../dist/assets/index-CeXFomlH.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../dist/assets/workbox-window.prod.es5-Bd17z0YL.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../dist/contactos.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../dist/favicon.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../dist/icon-192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../dist/icon-512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../dist/icons.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../dist/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../dist/manifest.webmanifest" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../dist/sw.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../dist/workbox-9c191d2f.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/contactos.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/favicon.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/icon192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/icon512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/icons.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/App.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/App.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/assets/hero.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/assets/react.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/assets/vite.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/components/ContactForm.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/components/ContactItem.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/components/ContactList.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/main.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../vite.config.js" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 7,
+  "fromUser": false
+}]]></component>
+  <component name="ProjectId" id="3J1VTL55kL8UmLJuKn5gNJuyr5e" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "challenge3",
+    "kotlin-language-version-configured": "true"
+  }
+}]]></component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0e132e70-51f4-4884-90fc-a03f89fb6f21" name="Changes" comment="" />
+      <created>1788828570106</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1788828570106</updated>
+    </task>
+    <servers />
+  </component>
+</project>
