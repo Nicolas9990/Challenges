@@ -1,88 +1,60 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   IonApp,
-  IonPage,
-  IonHeader,
-  IonToolbar,
-  IonTitle,
-  IonContent
+  IonRouterOutlet
 } from "@ionic/react";
+import { IonReactRouter } from "@ionic/react-router";
+import {
+  Route,
+  Navigate
+} from "react-router-dom";
 
-import TaskForm from "./components/TaskForm";
-import TaskList from "./components/TaskList";
+import Login from "./pages/Login";
+import Tasks from "./pages/Tasks";
 
 import "./App.css";
 
-interface Task {
-  id: number;
-  text: string;
-  completed: boolean;
-}
-
 function App() {
-  const [tasks, setTasks] = useState<Task[]>([
-    {
-      id: 1,
-      text: "Estudiar Ionic",
-      completed: false
-    },
-    {
-      id: 2,
-      text: "Hacer la tarea",
-      completed: false
-    }
-  ]);
-
-  const addTask = (text: string) => {
-    const newTask: Task = {
-      id: Date.now(),
-      text: text,
-      completed: false
-    };
-
-    setTasks([...tasks, newTask]);
-  };
-
-  const completeTask = (id: number) => {
-    const updatedTasks = tasks.map((task) => {
-      if (task.id === id) {
-        return {
-          ...task,
-          completed: !task.completed
-        };
-      }
-
-      return task;
-    });
-
-    setTasks(updatedTasks);
-  };
-
-  const deleteTask = (id: number) => {
-    const updatedTasks = tasks.filter((task) => task.id !== id);
-
-    setTasks(updatedTasks);
-  };
+  const logged = localStorage.getItem("logged") === "true";
 
   return (
     <IonApp>
-      <IonPage>
-        <IonHeader>
-          <IonToolbar>
-            <IonTitle>Tareitas</IonTitle>
-          </IonToolbar>
-        </IonHeader>
+      <IonReactRouter>
+        <IonRouterOutlet>
 
-        <IonContent className="ion-padding">
-          <TaskForm onAddTask={addTask} />
-
-          <TaskList
-            tasks={tasks}
-            onComplete={completeTask}
-            onDelete={deleteTask}
+          <Route
+            path="/login"
+            element={
+              logged ? (
+                <Navigate to="/tasks" />
+              ) : (
+                <Login />
+              )
+            }
           />
-        </IonContent>
-      </IonPage>
+
+          <Route
+            path="/tasks"
+            element={
+              logged ? (
+                <Tasks />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+
+          <Route
+            path="/"
+            element={
+              <Navigate
+                to={logged ? "/tasks" : "/login"}
+              />
+            }
+          />
+
+        </IonRouterOutlet>
+      </IonReactRouter>
     </IonApp>
   );
 }

@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 
+import { setupIonicReact } from "@ionic/react";
+
 import "@ionic/react/css/core.css";
 import "@ionic/react/css/normalize.css";
 import "@ionic/react/css/structure.css";
@@ -15,6 +17,10 @@ import "@ionic/react/css/flex-utils.css";
 import "@ionic/react/css/display.css";
 
 import "./theme/variables.css";
+
+import "./App.css";
+
+setupIonicReact();
 
 ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
