@@ -1,59 +1,39 @@
 import React from "react";
-import {
-  IonApp,
-  IonRouterOutlet
-} from "@ionic/react";
+import { IonApp, IonRouterOutlet } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import {
-  Route,
-  Navigate
-} from "react-router-dom";
+import { Navigate, Route } from "react-router-dom";
 
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 import Tasks from "./pages/Tasks";
+import { useAuthContext } from "./context/AuthContext";
 
 import "./App.css";
 
-function App() {
-  const logged = localStorage.getItem("logged") === "true";
+function AppRoutes() {
+  const { user, loading } = useAuthContext();
 
+  if (loading) {
+    return <div>Cargando...</div>;
+  }
+
+  return (
+    <IonRouterOutlet>
+      <Route path="/login" element={user ? <Navigate to="/tasks" replace /> : <Login />} />
+      <Route path="/register" element={user ? <Navigate to="/tasks" replace /> : <Register />} />
+      <Route path="/tasks" element={user ? <Tasks /> : <Navigate to="/login" replace />} />
+      <Route path="/dashboard" element={<Navigate to="/tasks" replace />} />
+      <Route path="/home" element={<Navigate to="/login" replace />} />
+      <Route path="/" element={<Navigate to={user ? "/tasks" : "/login"} replace />} />
+    </IonRouterOutlet>
+  );
+}
+
+function App() {
   return (
     <IonApp>
       <IonReactRouter>
-        <IonRouterOutlet>
-
-          <Route
-            path="/login"
-            element={
-              logged ? (
-                <Navigate to="/tasks" />
-              ) : (
-                <Login />
-              )
-            }
-          />
-
-          <Route
-            path="/tasks"
-            element={
-              logged ? (
-                <Tasks />
-              ) : (
-                <Navigate to="/login" />
-              )
-            }
-          />
-
-          <Route
-            path="/"
-            element={
-              <Navigate
-                to={logged ? "/tasks" : "/login"}
-              />
-            }
-          />
-
-        </IonRouterOutlet>
+        <AppRoutes />
       </IonReactRouter>
     </IonApp>
   );

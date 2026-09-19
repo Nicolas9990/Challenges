@@ -1,68 +1,30 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   IonPage,
   IonHeader,
   IonToolbar,
   IonTitle,
   IonContent,
-  IonButton
+  IonButton,
 } from "@ionic/react";
 import { useNavigate } from "react-router-dom";
 
 import TaskForm from "../components/TaskForm";
 import TaskList from "../components/TaskList";
-
-interface Task {
-  id: number;
-  text: string;
-  completed: boolean;
-}
+import { useTaskContext } from "../context/TaskContext";
+import { useAuthContext } from "../context/AuthContext";
 
 function Tasks() {
   const navigate = useNavigate();
+  const { tasks, addTask, completeTask, deleteTask } = useTaskContext();
+  const { logout } = useAuthContext();
 
-  const [tasks, setTasks] = useState<Task[]>([
-    {
-      id: 1,
-      text: "Estudiar Ionic",
-      completed: false
-    },
-    {
-      id: 2,
-      text: "Hacer la tarea",
-      completed: false
+  const handleLogout = async () => {
+    const result = await logout();
+
+    if (result.success) {
+      navigate("/login");
     }
-  ]);
-
-  const addTask = (text: string) => {
-    const newTask: Task = {
-      id: Date.now(),
-      text: text,
-      completed: false
-    };
-
-    setTasks([...tasks, newTask]);
-  };
-
-  const completeTask = (id: number) => {
-    setTasks(
-      tasks.map((task) =>
-        task.id === id
-          ? { ...task, completed: !task.completed }
-          : task
-      )
-    );
-  };
-
-  const deleteTask = (id: number) => {
-    setTasks(
-      tasks.filter((task) => task.id !== id)
-    );
-  };
-
-  const logout = () => {
-    localStorage.removeItem("logged");
-    window.location.href = "/login";
   };
 
   return (
@@ -71,10 +33,7 @@ function Tasks() {
         <IonToolbar>
           <IonTitle>Tareitas</IonTitle>
 
-          <IonButton
-            slot="end"
-            onClick={logout}
-          >
+          <IonButton slot="end" onClick={handleLogout}>
             Logout
           </IonButton>
         </IonToolbar>

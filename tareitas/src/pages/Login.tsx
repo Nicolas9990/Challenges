@@ -5,21 +5,25 @@ import {
   IonToolbar,
   IonTitle,
   IonContent,
-  IonItem,
-  IonButton
+  IonButton,
+  IonInput,
 } from "@ionic/react";
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../context/AuthContext";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const { login } = useAuthContext();
 
-  const login = () => {
-    if (email === "user@mail.com" && password === "123") {
-      localStorage.setItem("logged", "true");
+  const handleLogin = async () => {
+    const result = await login(email, password);
 
-      window.location.href = "/tasks";
+    if (result.success) {
+      navigate("/tasks");
     } else {
-      alert("Correo o contraseña incorrectos");
+      console.error("Error logging in:", result.error);
     }
   };
 
@@ -32,29 +36,31 @@ function Login() {
       </IonHeader>
 
       <IonContent className="ion-padding">
+        <IonInput
+          type="email"
+          placeholder="Email"
+          value={email}
+          onIonChange={(e) => setEmail(e.detail.value || "")}
+        />
 
-        <IonItem>
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </IonItem>
+        <IonInput
+          type="password"
+          placeholder="Password"
+          value={password}
+          onIonChange={(e) => setPassword(e.detail.value || "")}
+        />
 
-        <IonItem>
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </IonItem>
-
-        <IonButton expand="block" onClick={login}>
+        <IonButton expand="block" onClick={handleLogin}>
           Login
         </IonButton>
 
+        <IonButton
+          expand="block"
+          fill="clear"
+          onClick={() => navigate("/register")}
+        >
+          ¿No tienes cuenta? Regístrate
+        </IonButton>
       </IonContent>
     </IonPage>
   );
