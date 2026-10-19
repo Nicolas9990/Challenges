@@ -11,6 +11,9 @@ import {
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+// @ts-expect-error firebaseConfig is a JavaScript module without declarations.
+import { auth } from "../firebase/firebaseConfig";
 
 function Register() {
   const [email, setEmail] = useState("");
@@ -20,12 +23,11 @@ function Register() {
   const { register } = useAuthContext();
 
   const handleRegister = async () => {
-    const result = await register(email, password);
-
-    if (result.success) {
-      navigate("/login");
-    } else {
-      console.error("Error registering:", result.error);
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      navigate("/tasks");
+    }catch (error) {
+      console.error("Error registering:", error);
     }
   };
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   IonPage,
   IonHeader,
@@ -10,20 +10,24 @@ import {
 } from "@ionic/react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
+import { AuthContext } from "../context/MyContext";
+import { signInWithEmailAndPassword } from "firebase/auth";
+// @ts-ignore firebaseConfig is JavaScript and has no declaration file.
+import { auth } from "../firebase/firebaseConfig";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { login } = useAuthContext();
+  const { login } = useContext(AuthContext);
 
   const handleLogin = async () => {
-    const result = await login(email, password);
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
 
-    if (result.success) {
       navigate("/tasks");
-    } else {
-      console.error("Error logging in:", result.error);
+    }catch (error) {
+      console.error("Error logging in:", error);
     }
   };
 

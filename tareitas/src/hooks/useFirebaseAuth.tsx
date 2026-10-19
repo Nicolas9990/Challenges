@@ -8,7 +8,7 @@ import {
 } from "firebase/auth";
 // The Firebase config is currently a JavaScript module without type declarations.
 // @ts-expect-error -- auth is provided by the untyped config.js module.
-import { auth } from "../firebase/config";
+import { auth } from "../firebase/firebaseConfig";
 
 export function useFirebaseAuth() {
   const [user, setUser] = useState<User | null>(null);

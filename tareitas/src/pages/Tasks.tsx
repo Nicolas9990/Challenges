@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   IonPage,
   IonHeader,
@@ -6,6 +6,7 @@ import {
   IonTitle,
   IonContent,
   IonButton,
+  IonText,
 } from "@ionic/react";
 import { useNavigate } from "react-router-dom";
 
@@ -18,12 +19,16 @@ function Tasks() {
   const navigate = useNavigate();
   const { tasks, addTask, completeTask, deleteTask } = useTaskContext();
   const { logout } = useAuthContext();
+  const [logoutError, setLogoutError] = useState("");
 
   const handleLogout = async () => {
     const result = await logout();
 
     if (result.success) {
       navigate("/login");
+    } else {
+      console.error("Error logging out:", result.error);
+      setLogoutError("No se pudo cerrar la sesión. Inténtalo de nuevo.");
     }
   };
 
@@ -40,6 +45,12 @@ function Tasks() {
       </IonHeader>
 
       <IonContent className="ion-padding">
+        {logoutError && (
+          <IonText color="danger" role="alert">
+            <p>{logoutError}</p>
+          </IonText>
+        )}
+
         <TaskForm onAddTask={addTask} />
 
         <TaskList
@@ -53,4 +64,3 @@ function Tasks() {
 }
 
 export default Tasks;
-
