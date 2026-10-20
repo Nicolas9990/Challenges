@@ -7,8 +7,10 @@ import { getFirestore } from "firebase/firestore";
 import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
+
   apiKey: "AIzaSyB_hUn4zCM6TGQ05Fw_96g4u6im5fzlyGg",
   authDomain: "tareitas-uao.firebaseapp.com",
+  databaseURL: "https://tareitas-uao-default-rtdb.firebaseio.com",
   projectId: "tareitas-uao",
   storageBucket: "tareitas-uao.firebasestorage.app",
   messagingSenderId: "547084304859",
@@ -29,3 +31,4 @@ export {
   db,
   realtimeDb
 };
+
