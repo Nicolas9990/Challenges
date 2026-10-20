@@ -3,9 +3,9 @@ import { useTasks, type Task } from "../hooks/useTasks";
 
 interface TaskContextType {
   tasks: Task[];
-  addTask: (text: string) => void;
-  completeTask: (id: number) => void;
-  deleteTask: (id: number) => void;
+  addTask: (text: string) => Promise<void>;
+  completeTask: (id: string) => Promise<void>;
+  deleteTask: (id: string) => Promise<void>;
 }
 
 const TaskContext = createContext<TaskContextType | undefined>(undefined);
@@ -14,7 +14,9 @@ export function TaskProvider({ children }: { children: ReactNode }) {
   const tasksData = useTasks();
 
   return (
-    <TaskContext.Provider value={tasksData}>{children}</TaskContext.Provider>
+    <TaskContext.Provider value={tasksData}>
+      {children}
+    </TaskContext.Provider>
   );
 }
 

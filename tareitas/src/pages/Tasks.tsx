@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   IonPage,
   IonHeader,
@@ -6,7 +6,6 @@ import {
   IonTitle,
   IonContent,
   IonButton,
-  IonText,
 } from "@ionic/react";
 import { useNavigate } from "react-router-dom";
 
@@ -14,21 +13,21 @@ import TaskForm from "../components/TaskForm";
 import TaskList from "../components/TaskList";
 import { useTaskContext } from "../context/TaskContext";
 import { useAuthContext } from "../context/AuthContext";
+import { useNetwork } from "../hooks/useNetwork";
 
 function Tasks() {
   const navigate = useNavigate();
+
   const { tasks, addTask, completeTask, deleteTask } = useTaskContext();
   const { logout } = useAuthContext();
-  const [logoutError, setLogoutError] = useState("");
+
+  const { connected, connectionType } = useNetwork();
 
   const handleLogout = async () => {
     const result = await logout();
 
     if (result.success) {
       navigate("/login");
-    } else {
-      console.error("Error logging out:", result.error);
-      setLogoutError("No se pudo cerrar la sesión. Inténtalo de nuevo.");
     }
   };
 
@@ -38,6 +37,14 @@ function Tasks() {
         <IonToolbar>
           <IonTitle>Tareitas</IonTitle>
 
+          <IonButton slot="end" onClick={() => navigate("/contacts")}>
+            Contactos
+          </IonButton>
+
+          <IonButton slot="end" onClick={() => navigate("/fruits")}>
+            Frutas
+          </IonButton>
+
           <IonButton slot="end" onClick={handleLogout}>
             Logout
           </IonButton>
@@ -45,18 +52,29 @@ function Tasks() {
       </IonHeader>
 
       <IonContent className="ion-padding">
-        {logoutError && (
-          <IonText color="danger" role="alert">
-            <p>{logoutError}</p>
-          </IonText>
-        )}
+        <div
+          style={{
+            padding: "10px",
+            marginBottom: "10px",
+            borderRadius: "8px",
+            background: connected ? "#d4edda" : "#f8d7da",
+          }}
+        >
+          {connected
+            ? `🟢 Conectado (${connectionType})`
+            : "🔴 Sin conexión"}
+        </div>
 
-        <TaskForm onAddTask={addTask} />
+        <TaskForm
+          onAddTask={addTask}
+          disabled={!connected}
+        />
 
         <TaskList
           tasks={tasks}
           onComplete={completeTask}
           onDelete={deleteTask}
+          disabled={!connected}
         />
       </IonContent>
     </IonPage>

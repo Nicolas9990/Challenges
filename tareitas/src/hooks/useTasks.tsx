@@ -1,47 +1,76 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import {
+  ref,
+  push,
+  onValue,
+  update,
+  remove,
+} from "firebase/database";
+
+// @ts-expect-error firebaseConfig is JavaScript without a declaration file.
+import { realtimeDb } from "../firebase/firebaseConfig";
 
 export interface Task {
-  id: number;
+  id: string;
   text: string;
   completed: boolean;
 }
 
 export function useTasks() {
-  const [tasks, setTasks] = useState<Task[]>([
-    {
-      id: 1,
-      text: "Estudiar Ionic",
-      completed: false,
-    },
-    {
-      id: 2,
-      text: "Hacer la tarea",
-      completed: false,
-    },
-  ]);
+  const [tasks, setTasks] = useState<Task[]>([]);
 
-  const addTask = (text: string) => {
+  useEffect(() => {
+    const tasksRef = ref(realtimeDb, "tasks");
+
+    const unsubscribe = onValue(tasksRef, (snapshot) => {
+      const data = snapshot.val();
+
+      if (!data) {
+        setTasks([]);
+        return;
+      }
+
+      const tasksList: Task[] = Object.entries(data).map(
+        ([id, value]: [string, any]) => ({
+          id,
+          text: value.text,
+          completed: value.completed,
+        })
+      );
+
+      setTasks(tasksList);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const addTask = async (text: string): Promise<void> => {
     if (!text.trim()) return;
 
-    const newTask: Task = {
-      id: Date.now(),
+    const tasksRef = ref(realtimeDb, "tasks");
+
+    await push(tasksRef, {
       text: text.trim(),
       completed: false,
-    };
-
-    setTasks((prev) => [...prev, newTask]);
+    });
   };
 
-  const completeTask = (id: number) => {
-    setTasks((prev) =>
-      prev.map((task) =>
-        task.id === id ? { ...task, completed: !task.completed } : task
-      )
-    );
+  const completeTask = async (id: string): Promise<void> => {
+    const taskRef = ref(realtimeDb, `tasks/${id}`);
+
+    const task = tasks.find((task) => task.id === id);
+
+    if (!task) return;
+
+    await update(taskRef, {
+      completed: !task.completed,
+    });
   };
 
-  const deleteTask = (id: number) => {
-    setTasks((prev) => prev.filter((task) => task.id !== id));
+  const deleteTask = async (id: string): Promise<void> => {
+    const taskRef = ref(realtimeDb, `tasks/${id}`);
+
+    await remove(taskRef);
   };
 
   return {

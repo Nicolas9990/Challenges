@@ -1,35 +1,32 @@
 import React from "react";
-import { IonList } from "@ionic/react";
 import TaskItem from "./TaskItem";
-
-interface Task {
-  id: number;
-  text: string;
-  completed: boolean;
-}
+import type { Task } from "../hooks/useTasks";
 
 interface TaskListProps {
   tasks: Task[];
-  onComplete: (id: number) => void;
-  onDelete: (id: number) => void;
+  onComplete: (id: string) => Promise<void>;
+  onDelete: (id: string) => Promise<void>;
+  disabled?: boolean;
 }
 
 function TaskList({
   tasks,
   onComplete,
-  onDelete
+  onDelete,
+  disabled = false,
 }: TaskListProps) {
   return (
-    <IonList>
+    <div>
       {tasks.map((task) => (
         <TaskItem
           key={task.id}
           task={task}
           onComplete={onComplete}
           onDelete={onDelete}
+          disabled={disabled}
         />
       ))}
-    </IonList>
+    </div>
   );
 }
 

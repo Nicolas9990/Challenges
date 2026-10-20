@@ -9,6 +9,8 @@ import Tasks from "./pages/Tasks";
 import { useAuthContext } from "./context/AuthContext";
 
 import "./App.css";
+import Fruits from "./pages/Fruits";
+import Contacts from "./pages/Contacts";
 
 function AppRoutes() {
   const { user, loading } = useAuthContext();
@@ -25,6 +27,8 @@ function AppRoutes() {
       <Route path="/dashboard" element={<Navigate to="/tasks" replace />} />
       <Route path="/home" element={<Navigate to="/login" replace />} />
       <Route path="/" element={<Navigate to={user ? "/tasks" : "/login"} replace />} />
+      <Route path="/fruits" element={user ? <Fruits /> : <Navigate to="/login" replace />} />
+      <Route path="/contacts" element={user ? <Contacts /> : <Navigate to="/login" replace />}/>
     </IonRouterOutlet>
   );
 }
