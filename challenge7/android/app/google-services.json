@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "547084304859",
+    "firebase_url": "https://tareitas-uao-default-rtdb.firebaseio.com",
+    "project_id": "tareitas-uao",
+    "storage_bucket": "tareitas-uao.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:547084304859:android:3481d9da2a88f702b967fe",
+        "android_client_info": {
+          "package_name": "com.example.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_VgebqgqJBaXnndDXZVV0fsk4YIx5PK0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
